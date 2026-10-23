@@ -107,9 +107,9 @@ func newClangdLSPClient(logger jsonrpc.FunctionLogger, dataFolder *paths.Path, l
 	// "workspace/semanticTokens/refresh" panics as an unimplemented request.
 	// Register it as a custom request to handle it gracefully.
 	client.conn.RegisterCustomRequest("workspace/semanticTokens/refresh",
-		func(context.Context, jsonrpc.FunctionLogger, json.RawMessage) (interface{}, *jsonrpc.ResponseError) {
-		return nil, nil
-	})
+		func(context.Context, jsonrpc.FunctionLogger, json.RawMessage) (any, *jsonrpc.ResponseError) {
+			return nil, nil
+		})
 	client.conn.SetLogger(&Logger{
 		IncomingPrefix: "IDE     LS <-- Clangd",
 		OutgoingPrefix: "IDE     LS --> Clangd",
